@@ -21,23 +21,25 @@ USER coolq
 WORKDIR /home/coolq/
 
 ENV DISPLAY=:0 \
-    DISPLAY_INDEX=0\
     LANG=zh_CN.UTF-8 \
     LC_ALL=zh_CN.UTF-8 \
-    TZ=Asia/Shanghai \
-    WINEARCH=win32
+    TZ=Asia/Shanghai
 
 # configure wine via winetricks
 RUN winetricks win7
 RUN winetricks msscript
 RUN winetricks winhttp
-RUN rm -rf /home/coolq/.cache/winetricks/*
 
 # start vnc service
-RUN Xvfb $DISPLAY -screen $DISPLAY_INDEX $DISPLAY_RESOLUTION \
-  & x11vnc -display $DISPLAY -forever -bg \
-  & sleep 5 \
-  & /usr/bin/openbox-session
+RUN Xvfb :0 -screen 0 960x544x24 \
+  & x11vnc -display :0 -forever -bg
 
+RUN winetricks vcrun2008 /q
+RUN winetricks vcrun2010 /q /norestart
+RUN winetricks vcrun2012 /q /norestart
+RUN winetricks vcrun2013 /install /quiet
+RUN winetricks vcrun2015 /install /quiet
+RUN rm -rf /home/coolq/.cache/winetricks/*
 
-
+#& sleep 5 \
+#& /usr/bin/openbox-session
