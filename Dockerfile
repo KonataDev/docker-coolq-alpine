@@ -28,6 +28,10 @@ WORKDIR /home/coolq/.wine/drive_c/
 COPY cqair.zip cqair.zip
 RUN unzip cqair.zip
 
+# prepare fonts
+WORKDIR /home/coolq/.wine/drive_c/windows/Fonts/
+COPY simsun.ttf simsun.ttf
+
 # set owner
 WORKDIR /home/coolq/
 RUN chown -R coolq ./
