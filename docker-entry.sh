@@ -16,7 +16,7 @@ Xvfb :0 -screen 0 $DISPLAY_RESOLUTION \
 sleep 2
 
 # Start CoolQ
-wine $CQ_ROOT/CQ*.exe
+ wine $CQ_ROOT/CQ*.exe
 
 # Start Openbox session
 /usr/bin/openbox-session
