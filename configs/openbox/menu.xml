@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openbox_menu xmlns="http://openbox.org/3.4/menu">
+  <menu id="menu-coolq-mana" label="CoolQ 管理">
+    <item label="启动">
+      <action name="Execute">
+        <command>/bin/ash -c "DISPLAY=:0 wine $CQ_ROOT/CQ*.exe"</command>
+        <startupnotify>
+          <enabled>yes</enabled>
+        </startupnotify>
+      </action>
+    </item>
+    <item label="快速重启">
+      <action name="Execute">
+        <command>gnome-character-map</command>
+        <startupnotify>
+          <enabled>yes</enabled>
+        </startupnotify>
+      </action>
+    </item>
+  </menu>
+  <menu id="menu-coolq-actions" label="CoolQ 快速操作">
+    <menu id="submenu-coolq-actions-open" label="打开...">
+      <item label="coolq/">
+        <action name="Execute">
+          <command>/bin/ash -c "DISPLAY=:0 wine explorer /root,$CQ_ROOT"</command>
+          <startupnotify>
+            <enabled>yes</enabled>
+          </startupnotify>
+        </action>
+      </item>
+      <item label="coolq/data/">
+        <action name="Execute">
+          <command>/bin/ash -c "DISPLAY=:0 wine explorer /root,$CQ_DATA"</command>
+          <startupnotify>
+            <enabled>yes</enabled>
+          </startupnotify>
+        </action>
+      </item>
+      <item label="coolq/app/">
+        <action name="Execute">
+          <command>/bin/ash -c "DISPLAY=:0 wine explorer /root,$CQ_APP"</command>
+          <startupnotify>
+            <enabled>yes</enabled>
+          </startupnotify>
+        </action>
+    </item>
+    </menu>
+    <item label="快速清图/语音/表情">
+      <action name="Execute">
+        <command>/bin/ash -c "rm $CQ_DATA/bface/* && rm $CQ_DATA/image/* && rm $CQ_DATA/log/* && rm $CQ_DATA/record/* && rm $CQ_DATA/show/*"</command>
+        <startupnotify>
+          <enabled>yes</enabled>
+        </startupnotify>
+      </action>
+    </item>
+  </menu>
+  <menu id="menu-tools" label="常用工具">
+    <item label="Xterm 终端模拟器">
+      <action name="Execute">
+        <command>xterm</command>
+        <startupnotify>
+          <enabled>yes</enabled>
+        </startupnotify>
+      </action>
+    </item>
+    <item label="Nano 文本编辑器">
+      <action name="Execute">
+        <command>nano</command>
+        <startupnotify>
+          <enabled>yes</enabled>
+        </startupnotify>
+      </action>
+    </item>
+  </menu>
+  <menu id="menu-wine" label="Wine 相关设定">
+    <item label="Winetricks">
+      <action name="Execute">
+        <command>winetricks</command>
+        <startupnotify>
+          <enabled>yes</enabled>
+        </startupnotify>
+      </action>
+    </item>
+    <item label="Winecfg">
+      <action name="Execute">
+        <command>winecfg</command>
+        <startupnotify>
+          <enabled>yes</enabled>
+        </startupnotify>
+      </action>
+    </item>
+  </menu>
+
+  <menu id="root-menu" label="Openbox 3">
+    <separator label="CoolQ" />
+    <menu id="menu-coolq-mana" />
+    <menu id="menu-coolq-actions" />
+    <menu id="menu-tools" />
+    <menu id="menu-wine" />
+  </menu>
+</openbox_menu>
