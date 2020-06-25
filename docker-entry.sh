@@ -15,13 +15,6 @@ Xvfb :0 -screen 0 $DISPLAY_RESOLUTION \
 
 sleep 2
 
-# Install vcruntimes
-winetricks -q vcrun2008
-winetricks -q vcrun2010
-winetricks -q vcrun2012
-winetricks -q vcrun2013
-winetricks -q vcrun2019
-
 # Start CoolQ
 wine $CQ_ROOT/CQ*.exe
 
