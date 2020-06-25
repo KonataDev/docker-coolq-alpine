@@ -11,7 +11,10 @@ RUN rm /etc/apk/repositories \
  && apk update
 
 # install all dependencies
-RUN apk add --no-cache xvfb x11vnc wine wine_gecko winetricks curl openbox unzip xterm zenity nano htop
+RUN apk add --no-cache \
+    xvfb x11vnc \
+    wine wine_gecko winetricks \
+    curl openbox unzip rxvt-unicode zenity nano htop sudo
 
 # disable wget and force using curl
 RUN mv /usr/bin/wget /usr/bin/.wget
@@ -31,15 +34,20 @@ RUN rm coolq.zip \
  && rm !*
 
 # prepare fonts
-WORKDIR /home/coolq/.fonts
+WORKDIR /home/coolq/.fonts/
 RUN mkdir -p .wine/drive_c/windows/
 COPY fonts/* ./
 RUN ln -s .wine/drive_c/windows/Fonts .fonts
 
 # prepare openbox menu
-WORKDIR /etc/xdg/openbox
-RUN rm menu.xml
+WORKDIR /etc/xdg/openbox/
+RUN rm menu.xml 2>/dev/null; exit 0
 COPY configs/openbox/menu.xml ./
+
+# prepare default config for rxvt
+WORKDIR /home/coolq/
+RUN rm .Xdefaults 2>/dev/null; exit 0
+COPY configs/rxvt/.Xdefaults ./
 
 # prepare entry file
 WORKDIR /home/coolq/
@@ -51,13 +59,14 @@ RUN chown -R coolq:coolq /home/coolq/
 
 USER coolq
 WORKDIR /home/coolq/
+
+# Refresh font cache
 RUN fc-cache -f -v
 
 # configure wine via winetricks
 RUN winetricks -q win7
 RUN winetricks -q msscript
 RUN winetricks -q winhttp
-#RUN winetricks gdiplus
 
 RUN rm -rf .cache/winetricks/*
 
