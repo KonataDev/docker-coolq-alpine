@@ -19,7 +19,7 @@
     </item>
   </menu>
   <menu id="menu-coolq-actions" label="CoolQ 快速操作">
-    <menu id="submenu-coolq-actions-open" label="打开...">
+    <menu id="submenu-coolq-actions-open" label="打开目录...">
       <item label="coolq/">
         <action name="Execute">
           <command>/bin/ash -c "DISPLAY=:0 wine explorer /root,$CQ_ROOT"</command>
@@ -65,7 +65,7 @@
     </item>
     <item label="Nano 文本编辑器">
       <action name="Execute">
-        <command>urxvt -e "nano"</command>
+        <command>urxvt  -geometry 85x20 -e "nano"</command>
         <startupnotify>
           <enabled>yes</enabled>
         </startupnotify>
@@ -73,7 +73,7 @@
     </item>
     <item label="Htop 任务管理器">
       <action name="Execute">
-        <command>urxvt -e "htop"</command>
+        <command>urxvt -geometry 85x20 -e "htop"</command>
         <startupnotify>
           <enabled>yes</enabled>
         </startupnotify>
