@@ -11,18 +11,13 @@ RUN rm /etc/apk/repositories \
  && apk update
 
 # install all dependencies
-RUN apk add --no-cache xvfb x11vnc wine wine_gecko winetricks curl openbox unzip xterm zenity nano
+RUN apk add --no-cache xvfb x11vnc wine wine_gecko winetricks curl openbox unzip xterm zenity nano htop
 
 # disable wget and force using curl
 RUN mv /usr/bin/wget /usr/bin/.wget
 
 # create user
 RUN adduser -h /home/coolq/ -D coolq
-
-# prepare entry file
-WORKDIR /home/coolq/
-COPY docker-entry.sh ./docker-entry.sh
-RUN chmod +x ./docker-entry.sh
 
 # prepare coolq release
 WORKDIR /home/coolq/.wine/drive_c/
@@ -45,6 +40,11 @@ RUN ln -s .wine/drive_c/windows/Fonts .fonts
 WORKDIR /etc/xdg/openbox
 RUN rm menu.xml
 COPY configs/openbox/menu.xml ./
+
+# prepare entry file
+WORKDIR /home/coolq/
+COPY docker-entry.sh ./docker-entry.sh
+RUN chmod +x ./docker-entry.sh
 
 # set owner
 RUN chown -R coolq:coolq /home/coolq/
