@@ -1,0 +1,8 @@
+Xft.dpi:96
+URxvt.font: xft:Yahei Mono:size=10:style=Regular:antialias=true,xft:Yahei Mono:size=10:style=Regular:antialias=true
+URxvt.boldfont: xft:Yahei Mono:size=10:style=Bold:antialias=true,xft:Yahei Mono:size=10:style=Bold:antialias=true
+URxvt.scrollBar: False
+URxvt.scrollBar_right: False
+URxvt.scrollBar_floating: False
+URxvt.scrollstyle: plain
+URxvt.depth:32
