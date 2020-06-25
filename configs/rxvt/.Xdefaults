@@ -5,4 +5,4 @@ URxvt.scrollBar: False
 URxvt.scrollBar_right: False
 URxvt.scrollBar_floating: False
 URxvt.scrollstyle: plain
-URxvt.depth:32
+URxvt.geometry: 59x13
