@@ -4,12 +4,23 @@ version: '3'
 
 services:
   coolq:
-    build: .
     restart: always
     container_name: 'coolq'
+    build:
+      context: .
+
+      # select coolq release you want to download
+      args:
+        COOLQ_VERSION: https://dlsec.cqp.me/cqa-xiaoi
+        # COOLQ_VERSION: https://dlsec.cqp.me/cqa-tuling
+        # COOLQ_VERSION: https://dlsec.cqp.me/cqp-xiaoi
+        # COOLQ_VERSION: https://dlsec.cqp.me/cqp-tuling
+        # COOLQ_VERSION: https://dlsec.cqp.me/cqp-full
+
+    # display resolution
     environment:
-      DISPLAY_RESOLUTION: 960x544x24
-      
+      - DISPLAY_RESOLUTION=960x544x24
+
     # expose vnc port to 2333
     ports:
       - '2333:5900'
