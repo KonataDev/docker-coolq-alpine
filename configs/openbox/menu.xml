@@ -55,9 +55,9 @@
     </item>
   </menu>
   <menu id="menu-tools" label="常用工具">
-    <item label="Xterm 终端模拟器">
+    <item label="uRxvt 终端模拟器">
       <action name="Execute">
-        <command>xterm</command>
+        <command>urxvt</command>
         <startupnotify>
           <enabled>yes</enabled>
         </startupnotify>
@@ -65,7 +65,7 @@
     </item>
     <item label="Nano 文本编辑器">
       <action name="Execute">
-        <command>xterm -e "nano"</command>
+        <command>urxvt -e "nano"</command>
         <startupnotify>
           <enabled>yes</enabled>
         </startupnotify>
@@ -73,7 +73,7 @@
     </item>
     <item label="Htop 任务管理器">
       <action name="Execute">
-        <command>xterm -e "htop"</command>
+        <command>urxvt -e "htop"</command>
         <startupnotify>
           <enabled>yes</enabled>
         </startupnotify>
