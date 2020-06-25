@@ -11,7 +11,7 @@ RUN rm /etc/apk/repositories \
  && apk update
 
 # install all dependencies
-RUN apk add --no-cache xvfb x11vnc wine wine_gecko winetricks curl openbox unzip
+RUN apk add --no-cache xvfb x11vnc wine wine_gecko winetricks curl openbox unzip xterm zenity nano
 
 # disable wget and force using curl
 RUN mv /usr/bin/wget /usr/bin/.wget
@@ -41,23 +41,24 @@ RUN mkdir -p .wine/drive_c/windows/
 COPY fonts/* ./
 RUN ln -s .wine/drive_c/windows/Fonts .fonts
 
+# prepare openbox menu
+WORKDIR /etc/xdg/openbox
+RUN rm menu.xml
+COPY configs/openbox/menu.xml ./
+
 # set owner
-WORKDIR /home/coolq/
-RUN chown -R coolq ./
+RUN chown -R coolq:coolq /home/coolq/
 
 USER coolq
+WORKDIR /home/coolq/
 RUN fc-cache -f -v
 
 # configure wine via winetricks
-#RUN winetricks win7
-#RUN winetricks msscript
-#RUN winetricks winhttp
+RUN winetricks -q win7
+RUN winetricks -q msscript
+RUN winetricks -q winhttp
 #RUN winetricks gdiplus
-# RUN DISPLAY=:0 winetricks vcrun2008 /q
-# RUN DISPLAY=:0 winetricks vcrun2010 /q /norestart
-# RUN DISPLAY=:0 winetricks vcrun2012 /q /norestart
-# RUN DISPLAY=:0 winetricks vcrun2013 /install /quiet
-# RUN DISPLAY=:0 winetricks vcrun2015 /install /quiet
-# RUN rm -rf .cache/winetricks/*
+
+RUN rm -rf .cache/winetricks/*
 
 ENTRYPOINT ["./docker-entry.sh"]
