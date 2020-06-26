@@ -1,73 +1,49 @@
 FROM i386/alpine:3.12
 ARG COOLQ_VERSION
 
-# prepare repositories
-RUN rm /etc/apk/repositories \
- && echo "http://dl-cdn.alpinelinux.org/alpine/v3.12/main" >> /etc/apk/repositories \
- && echo "http://dl-cdn.alpinelinux.org/alpine/v3.12/community" >> /etc/apk/repositories \
- && echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories \
- && echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
- && echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
- && apk update
-
-# install all dependencies
-RUN apk add --no-cache \
-    xvfb x11vnc \
-    wine wine_gecko winetricks \
-    curl openbox unzip rxvt-unicode zenity nano htop sudo
-
-# disable wget and force using curl
-RUN mv /usr/bin/wget /usr/bin/.wget
+# docker image patch up
+COPY docker_root /
 
 # create user
-RUN adduser -h /home/coolq/ -D coolq
+RUN cd /home/coolq/ \
+ && adduser -h /home/coolq/ -D coolq \
+
+# install all dependencies
+ && apk update \
+ && apk add --no-cache \
+    xvfb x11vnc \
+    wine winetricks \
+    curl openbox unzip rxvt-unicode nano htop \
+
+# disable wget and force using curl
+ && mv /usr/bin/wget /usr/bin/.wget \
 
 # prepare coolq release
-WORKDIR /home/coolq/.wine/drive_c/
-RUN curl -L ${COOLQ_VERSION} --output coolq.zip \
- && unzip coolq.zip
-RUN mv *Air CQRelease 2>/dev/null; exit 0
-RUN mv *Pro CQRelease 2>/dev/null; exit 0
-
-RUN rm coolq.zip \
- && rm *.url \
- && rm !*
+ && curl -L ${COOLQ_VERSION} --output .wine/drive_c/CQRelease/temp/coolq.zip \
+ && unzip .wine/drive_c/CQRelease/temp/coolq.zip -d .wine/drive_c/CQRelease/temp/ \
+ && mv .wine/drive_c/CQRelease/temp/*Air/* .wine/drive_c/CQRelease/ 2>/dev/null; exit 0 \
+ && mv .wine/drive_c/CQRelease/temp/*Pro/* .wine/drive_c/CQRelease/ 2>/dev/null; exit 0 \
+ && rm -rf .wine/drive_c/CQRelease/temp \
 
 # prepare fonts
-WORKDIR /home/coolq/.fonts/
-RUN mkdir -p .wine/drive_c/windows/
-COPY fonts/* ./
-RUN ln -s .wine/drive_c/windows/Fonts .fonts
-
-# prepare openbox menu
-WORKDIR /etc/xdg/openbox/
-RUN rm menu.xml 2>/dev/null; exit 0
-COPY configs/openbox/menu.xml ./
-
-# prepare default config for rxvt
-WORKDIR /home/coolq/
-RUN rm .Xdefaults 2>/dev/null; exit 0
-COPY configs/rxvt/.Xdefaults ./
+ && ln -s .wine/drive_c/windows/Fonts .fonts \
 
 # prepare entry file
-WORKDIR /home/coolq/
-COPY docker-entry.sh ./docker-entry.sh
-RUN chmod +x ./docker-entry.sh
+ && chmod +x docker-entry.sh \
 
 # set owner
-RUN chown -R coolq:coolq /home/coolq/
+ && chown -R coolq:coolq /home/coolq/
 
 USER coolq
-WORKDIR /home/coolq/
 
 # Refresh font cache
-RUN fc-cache -f -v
+RUN fc-cache -f -v \
 
 # configure wine via winetricks
-RUN winetricks -q win7
-RUN winetricks -q msscript
-RUN winetricks -q winhttp
+# && winetricks -q win7 \
+# && winetricks -q msscript \
+# && winetricks -q winhttp \
 
-RUN rm -rf .cache/winetricks/*
+ && rm -rf .cache/winetricks
 
-ENTRYPOINT ["./docker-entry.sh"]
+ENTRYPOINT ["/home/coolq/docker-entry.sh"]

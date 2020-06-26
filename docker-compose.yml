@@ -24,3 +24,8 @@ services:
     # expose vnc port to 2333
     ports:
       - '2333:5900'
+
+    # map persistent data folder
+    volumes:
+      - ./winedata:/home/coolq/.wine
+      - ./cqdata:/home/coolq/.wine/drive_c/CQRelease
