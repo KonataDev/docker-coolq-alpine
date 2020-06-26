@@ -27,5 +27,4 @@ services:
 
     # map persistent data folder
     volumes:
-      - ./winedata:/home/coolq/.wine
-      - ./cqdata:/home/coolq/.wine/drive_c/CQRelease
+      - ./cqdata:/home/coolq/cqdata

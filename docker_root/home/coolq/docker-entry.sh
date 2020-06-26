@@ -4,10 +4,10 @@ export DISPLAY=:0 \
        LANG=zh_CN.UTF-8 \
        LC_ALL=zh_CN.UTF-8 \
        TZ=Asia/Shanghai \
-       CQ_ROOT=~/.wine/drive_c/CQRelease \
-       CQ_DATA=~/.wine/drive_c/CQRelease/data \
-       CQ_APP=~/.wine/drive_c/CQRelease/app \
-       CQ_CONF=~/.wine/drive_c/CQRelease/conf
+       CQ_ROOT=~/cqdata \
+       CQ_DATA=~/cqdata/data \
+       CQ_APP=~/cqdata/app \
+       CQ_CONF=~/cqdata/conf
 
 
 # Start Xvfb and VNC
