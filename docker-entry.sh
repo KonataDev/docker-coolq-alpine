@@ -6,7 +6,9 @@ export DISPLAY=:0 \
        TZ=Asia/Shanghai \
        CQ_ROOT=~/.wine/drive_c/CQRelease \
        CQ_DATA=~/.wine/drive_c/CQRelease/data \
-       CQ_APP=~/.wine/drive_c/CQRelease/app
+       CQ_APP=~/.wine/drive_c/CQRelease/app \
+       CQ_CONF=~/.wine/drive_c/CQRelease/conf
+
 
 # Start Xvfb and VNC
 rm /tmp/.X0-lock
@@ -16,7 +18,7 @@ Xvfb :0 -screen 0 $DISPLAY_RESOLUTION \
 sleep 2
 
 # Start CoolQ
- wine $CQ_ROOT/CQ*.exe
+wine $CQ_ROOT/CQ*.exe
 
 # Start Openbox session
 /usr/bin/openbox-session
