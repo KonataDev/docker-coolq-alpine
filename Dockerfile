@@ -26,16 +26,13 @@ RUN cd /home/coolq/ \
 # prepare entry file
  && chmod +x docker-entry.sh \
 # set owner
- && chown -R coolq:coolq /home/coolq/
-
-USER coolq
-
+ && chown -R coolq:coolq /home/coolq/ \
+# switch to new user
+ && su coolq \
 # Refresh font cache
-RUN fc-cache -f -v \
+ && fc-cache -f -v \
 # configure wine via winetricks
- && winetricks win7 \
- && winetricks msscript \
- && winetricks winhttp \
+ && winetricks win7 msscript winhttp \
  && rm -rf .cache/winetricks
 
 ENTRYPOINT ["/home/coolq/docker-entry.sh"]
