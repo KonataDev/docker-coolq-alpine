@@ -1,6 +1,7 @@
 ## docker-coolq-alpine
 
-![Docker Compose](https://github.com/TheSnowfield/docker-coolq-alpine/workflows/Docker%20Compose/badge.svg)
+[![Docker Compose](https://github.com/TheSnowfield/docker-coolq-alpine/workflows/Docker%20Compose/badge.svg)](#)
+[![License](https://img.shields.io/static/v1?label=license&message=GPL-3.0&color=blue)](#)
 
 A lightweight coolq docker container based on Alpine Linux.
 
