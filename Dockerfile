@@ -5,9 +5,14 @@ ARG COOLQ_VERSION
 COPY docker_root /
 
 # create user
-RUN cd /home/coolq/ \
- && adduser -h /home/coolq/ -D coolq \
-# fix permissions
+RUN adduser -h /home/coolq/ -D coolq \
+ # delete all .gitkeep
+ && rm /home/coolq/.wine/drive_c/windows/.gitkeep \
+ && rm /home/coolq/cqdata/temp/.gitkeep \
+ && rm /usr/share/wine/gecko/.gitkeep \
+ && rm /usr/share/wine/mono/.gitkeep \
+# fix wine permissions
+ && cd /home/coolq/ \
  && chown -R coolq .wine/ \
 # install all dependencies
  && apk update \
@@ -49,4 +54,5 @@ RUN fc-cache -f -v \
  && winetricks winhttp \
  && rm -rf .cache/winetricks 2>/dev/null || true
 
- ENTRYPOINT ["/home/coolq/docker-entry.sh"]
+VOLUME ["/home/coolq/cqdata"]
+ENTRYPOINT ["/home/coolq/docker-entry.sh"]
