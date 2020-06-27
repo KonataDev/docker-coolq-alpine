@@ -1,0 +1,9 @@
+# This is a file for Gitlab CI
+stages:
+  - build
+
+job1:
+  stage: build
+  only: master
+  script:
+    - docker-compose build
