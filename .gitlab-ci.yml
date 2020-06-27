@@ -2,7 +2,7 @@
 stages:
   - build
 
-job1:
+build:
   stage: build
   script:
     - docker-compose build
