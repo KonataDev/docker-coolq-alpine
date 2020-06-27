@@ -15,9 +15,13 @@ rm /tmp/.X0-lock
 Xvfb :0 -screen 0 $DISPLAY_RESOLUTION \
   & x11vnc -display :0 -forever -bg
 
-# is first running
+# Is first running
 if [ -d "/home/coolq/.cqdata" ]
 then
+  # Delete another release is exists
+  rm ~/cqdata/CQ*.exe || :
+
+  # Move templary folder
   mv ~/.cqdata/* ~/cqdata
   rm -r ~/.cqdata
 fi
