@@ -8,7 +8,7 @@ COPY docker_root /
 RUN adduser -h /home/coolq/ -D coolq \
  # delete all .gitkeep
  && rm /home/coolq/.wine/drive_c/windows/.gitkeep \
- && rm /home/coolq/cqdata/temp/.gitkeep \
+ && rm /home/coolq/.cqdata/temp/.gitkeep \
  && rm /usr/share/wine/gecko/.gitkeep \
  && rm /usr/share/wine/mono/.gitkeep \
 # fix wine permissions
@@ -23,11 +23,11 @@ RUN adduser -h /home/coolq/ -D coolq \
 # disable wget and force using curl
  && mv /usr/bin/wget /usr/bin/.wget \
 # prepare coolq release
- && curl -L ${COOLQ_VERSION} --output cqdata/temp/coolq.zip \
- && unzip cqdata/temp/coolq.zip -d cqdata/temp/ \
- && mv cqdata/temp/*Air/* cqdata/temp/ 2>/dev/null || true \
- && mv cqdata/temp/*Pro/* cqdata/temp/ 2>/dev/null || true \
- && rm -rf cqdata/temp \
+ && curl -L ${COOLQ_VERSION} --output .cqdata/temp/coolq.zip \
+ && unzip .cqdata/temp/coolq.zip -d .cqdata/temp/ \
+ && mv .cqdata/temp/*Air/* .cqdata/ 2>/dev/null || : \
+ && mv .cqdata/temp/*Pro/* .cqdata/ 2>/dev/null || : \
+ && rm -rf .cqdata/temp \
 # prepare wine gecko
  && curl -L https://dl.winehq.org/wine/wine-gecko/2.47.1/wine-gecko-2.47.1-x86.tar.bz2 --output wine-gecko-2.47.1-x86.tar.bz2 \
  && tar xvf wine-gecko-2.47.1-x86.tar.bz2 -C /usr/share/wine/gecko/ \
@@ -39,7 +39,7 @@ RUN adduser -h /home/coolq/ -D coolq \
 # prepare fonts
  && ln -s .wine/drive_c/windows/Fonts .fonts \
 # prepare entry file
- && chmod +x docker-entry.sh \
+ && chmod +x .docker-entry.sh \
 # set owner
  && chown -R coolq /home/coolq/
 
@@ -52,7 +52,6 @@ RUN fc-cache -f -v \
  && winetricks win7 \
  && winetricks msscript \
  && winetricks winhttp \
- && rm -rf .cache/winetricks 2>/dev/null || true
+ && rm -rf .cache/winetricks 2>/dev/null || :
 
-VOLUME ["/home/coolq/cqdata"]
-ENTRYPOINT ["/home/coolq/docker-entry.sh"]
+ENTRYPOINT ["/home/coolq/.docker-entry.sh"]
