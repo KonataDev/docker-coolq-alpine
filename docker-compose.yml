@@ -17,7 +17,7 @@ services:
         # COOLQ_VERSION: https://dlsec.cqp.me/cqp-tuling
         # COOLQ_VERSION: https://dlsec.cqp.me/cqp-full
 
-    # display resolution
+    # display resolution width x height x bitdepth
     environment:
       - DISPLAY_RESOLUTION=960x544x24
 
