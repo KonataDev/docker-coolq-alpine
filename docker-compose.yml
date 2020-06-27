@@ -24,7 +24,3 @@ services:
     # expose vnc port to 2333
     ports:
       - '2333:5900'
-
-    # map persistent data folder
-    volumes:
-      - ./cqdata:/home/coolq/cqdata
