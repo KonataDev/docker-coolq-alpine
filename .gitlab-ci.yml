@@ -4,6 +4,5 @@ stages:
 
 job1:
   stage: build
-  only: master
   script:
     - docker-compose build
