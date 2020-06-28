@@ -5,5 +5,4 @@ stages:
 build:
   stage: build
   script:
-    - docker-compose build
-    - docker-compose rm -fsv
+    - docker-compose build --force-rm --no-cache
