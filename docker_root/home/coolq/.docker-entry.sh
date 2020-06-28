@@ -18,7 +18,7 @@ Xvfb :0 -screen 0 $DISPLAY_RESOLUTION \
 # Is first running
 if [ -d "/home/coolq/.cqdata" ]
 then
-  # Delete another release is exists
+  # Delete another release if exists
   rm ~/cqdata/CQ*.exe || :
 
   # Move templary folder

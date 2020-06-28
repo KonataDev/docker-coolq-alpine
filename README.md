@@ -27,7 +27,7 @@ A lightweight coolq docker container based on Alpine Linux.
 - [ ] CoolQ reboot menu
 - [ ] Chinese input built-in
 - [ ] Replace x11vnc with noVNC
-- [ ] Find the way to using original `winhttp.dll` (more compatible)
+- [ ] Find the way to using original `winhttp.dll` for more compatible
 
 ## License
 licensed under GPL-3.0 ❤
