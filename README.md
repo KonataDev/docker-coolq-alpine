@@ -15,7 +15,7 @@ A lightweight coolq docker container based on Alpine Linux.
 ## Get started
 > **Hint:** Please make sure you have installed docker and docker-compose first.
 
-> **Hint:** You could set your preferences by editing the `docker-compose.yml` file, Like access ports, CoolQ releases, persistent data locations \_(:3) z)\_
+> **Hint:** You could set your preferences by editing the `docker-compose.yml` file, like access ports, CoolQ releases, persistent data locations \_(:3) z)\_
 
 ```bash
   $ docker-compose build && \
@@ -24,6 +24,7 @@ A lightweight coolq docker container based on Alpine Linux.
 ```
 
 ## TODOs
+- [ ] CoolQ reboot menu
 - [ ] Chinese input built-in
 - [ ] Replace x11vnc with noVNC
 - [ ] Find the way to using original `winhttp.dll` (more compatible)
