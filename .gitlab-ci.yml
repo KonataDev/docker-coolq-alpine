@@ -6,3 +6,4 @@ build:
   stage: build
   script:
     - docker-compose build
+    - docker-compose rm -fsv
