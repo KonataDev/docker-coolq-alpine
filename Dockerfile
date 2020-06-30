@@ -41,12 +41,12 @@ RUN adduser -h /home/coolq/ -D coolq \
 # prepare entry file
  && chmod +x .docker-entry.sh \
 # set owner
- && chown -R coolq /home/coolq/
+ && chown -R coolq:coolq /home/coolq/
 
 # switch to new user
 USER coolq
 
-# Refresh font cache
+# refresh font cache
 RUN fc-cache -f -v \
 # configure wine via winetricks
  && winetricks win7 \

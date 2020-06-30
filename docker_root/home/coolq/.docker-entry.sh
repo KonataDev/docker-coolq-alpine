@@ -10,20 +10,16 @@ export DISPLAY=:0 \
        CQ_CONF=~/cqdata/conf
 
 
-# Start Xvfb and VNC
-rm /tmp/.X0-lock
+# start Xvfb and VNC
+rm /tmp/.X0-lock 2>/dev/null || :
 Xvfb :0 -screen 0 $DISPLAY_RESOLUTION \
   & x11vnc -display :0 -forever -bg
 
-# Is first running
-if [ -d "/home/coolq/.cqdata" ]
-then
-  # Delete another release if exists
-  rm ~/cqdata/CQ*.exe || :
-
-  # Move templary folder
-  mv ~/.cqdata/* ~/cqdata
-  rm -r ~/.cqdata
+# is first running
+if [ -d "/home/coolq/cqdata/" ] && [ -z "$(ls -A /home/coolq/cqdata/)" ]; then
+  # move templary folder
+  cp -r ~/.cqdata/* ~/cqdata
+  rm -rf ~/.cqdata
 fi
 
 sleep 2
