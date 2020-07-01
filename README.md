@@ -23,13 +23,14 @@ A lightweight coolq docker container based on Alpine Linux.
 ```bash
   $ docker-compose build && \
     docker-compose up -d
+
   # Enjoy! (｡･∀･)ﾉﾞ
 ```
 
 ### Using Docker Image
 ```bash
   # Pull docker image
-  $ docker pull thesnowfield/coolq-alpine:latest-cqa-xiaoi
+  $ docker pull thesnowfield/coolq-alpine:latest
 
   # run the image
   $ docker run \
@@ -37,12 +38,13 @@ A lightweight coolq docker container based on Alpine Linux.
     --name coolq \
     # set display resolution to 960x544 24bit
     --env DISPLAY_RESOLUTION=960x544x24 \
-    # set persistent data save location to ./cqdata
+    # save persistent data to ./cqdata
     --volume ./cqdata:/home/coolq/cqdata \
     # expose your vnc remote port at 2333
     --publish 2333:5900 \
     thesnowfield/coolq-alpine:latest
-  # Enjoy! (｡･∀･)ﾉﾞ
+
+   # Enjoy! (｡･∀･)ﾉﾞ
 ```
 
 ## TODOs
@@ -51,7 +53,7 @@ A lightweight coolq docker container based on Alpine Linux.
 - [ ] Chinese input built-in
 - [ ] Replace x11vnc with noVNC
 - [ ] Add vnc password support
-- [ ] Find the way to defaultly using original `winhttp.dll` for more compatible
+- [x] Find the way to defaultly using original `winhttp.dll` for more compatible
 
 ## License
 licensed under GPL-3.0 ❤
