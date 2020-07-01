@@ -49,9 +49,10 @@ USER coolq
 # refresh font cache
 RUN fc-cache -f -v \
 # configure wine via winetricks
- && winetricks win7 \
- && winetricks msscript \
+ && winetricks -q win7 \
+ && winetricks -q msscript \
  && winetricks winhttp \
+# clean download cache
  && rm -rf .cache/winetricks 2>/dev/null || :
 
 ENTRYPOINT ["/home/coolq/.docker-entry.sh"]

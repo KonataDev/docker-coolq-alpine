@@ -9,7 +9,6 @@ export DISPLAY=:0 \
        CQ_APP=~/cqdata/app \
        CQ_CONF=~/cqdata/conf
 
-
 # start Xvfb and VNC
 rm /tmp/.X0-lock 2>/dev/null || :
 Xvfb :0 -screen 0 $DISPLAY_RESOLUTION \
@@ -17,15 +16,21 @@ Xvfb :0 -screen 0 $DISPLAY_RESOLUTION \
 
 # is first running
 if [ -d "/home/coolq/cqdata/" ] && [ -z "$(ls -A /home/coolq/cqdata/)" ]; then
-  # move templary folder
+  # copy templary folder
   cp -r ~/.cqdata/* ~/cqdata
-  rm -rf ~/.cqdata
 fi
+
+# merge reg files
+# I tried winetricks verb or wine command in the dockerfile but both failed
+# winetricks only can change the value, delete or append will fail :think:
+# so...maybe it's a bug from winetricks?
+wine regedit ~/.wine/cq_winhttp.reg
+wine regedit ~/.wine/cq_msscript.reg
 
 sleep 2
 
-# Start CoolQ
+# start CoolQ
 wine $CQ_ROOT/CQ*.exe
 
-# Start Openbox session
+# start Openbox session
 /usr/bin/openbox-session
